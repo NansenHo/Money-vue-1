@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
-import Home from '@/views/Home.vue';
 import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import Statistics from '@/views/Statistics.vue';
+import NotFound from '@/views/NotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -25,6 +25,10 @@ const routes: Array<RouteConfig> = [
         path: '/statistics',
         component: Statistics
     },
+    {
+        path: '*', // * 即除了上面的路径之外的所有
+        component: NotFound
+    }
 ];
 
 const router = new VueRouter({
