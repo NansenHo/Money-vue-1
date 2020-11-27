@@ -1,7 +1,7 @@
 <template>
     <div class="nav-wrapper">
         <div class="content">
-            the Dog named Money
+            <p>the Dog named Money</p>
         </div>
         <Nav/>
     </div>
