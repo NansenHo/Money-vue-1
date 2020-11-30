@@ -6,3 +6,13 @@ a { /* 更改 a 标签默认样式 */
   text-decoration: none;
   color: inherit;
 }
+
+ul, ol {
+  list-style: none;
+}
+button, input{
+  font: inherit;
+}
+:focus {
+  outline: none;
+}
