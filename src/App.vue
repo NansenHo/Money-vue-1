@@ -10,12 +10,22 @@
         box-sizing: border-box;
     }
 
+    body {
+        line-height: 1.5; /* 默认行高 */
+    }
+
+    a { /* 更改 a 标签默认样式 */
+        text-decoration: none;
+        color: inherit;
+    }
+
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+
     }
 
     #nav {
