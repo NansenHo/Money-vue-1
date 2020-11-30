@@ -1,12 +1,12 @@
 <template>
     <nav> <!-- <div class="nav"> 错！ <nav> 对！ -->
-        <router-link to="/money" class="item" active-class="selected"> <!-- router 并不是一个标签，所以我们添加一个类来给其加CSS -->
-            <Icon name="money"/>
-            记账
-        </router-link>
         <router-link to="/labels" class="item" active-class="selected">
             <Icon name="labels"/>
             标签
+        </router-link>
+        <router-link to="/money" class="item money" active-class="selected"> <!-- router 并不是一个标签，所以我们添加一个类来给其加CSS -->
+            <Icon name="money"/>
+            记账
         </router-link>
         <router-link to="/statistics" class="item" active-class="selected">
             <Icon name="statistics"/>
@@ -22,11 +22,13 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "~@/assets/style/helper.scss";
     nav {
         display: flex;
-        box-shadow: 0 0 3px rgba(0,0,0,0.25);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
         flex-direction: row;
         font-size: 12px;
+
         > .item { /* SCSS 的写法 */
             padding: 2px 0;
             width: 33.33333%;
@@ -34,15 +36,18 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+
             .icon {
                 width: 32px;
                 height: 32px;
             }
         }
-        > .item.selected {
-            color: rgba(0,0,0,0.5);
-        }
 
+        > .item.selected {
+            .icon {
+                color: $color-highlight;
+            }
+        }
 
     }
 

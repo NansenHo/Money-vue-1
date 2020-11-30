@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path') // 引入一个叫做 path 的 node.js 的模块
 
 module.exports = {
