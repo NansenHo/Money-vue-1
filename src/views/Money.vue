@@ -3,7 +3,7 @@
         <NumberPad/>
         <Remarks/>
         <Label/>
-        <Types xxx="hi"/>
+        <Types :prop-a=" 333 " />
     </layout>
 </template>
 
