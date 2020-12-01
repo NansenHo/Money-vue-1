@@ -1,28 +1,6 @@
+<script src="../router/index.ts"></script>
 <template>
-    <layout>
-        <div>
-            <ul class="types">
-                <li class="selected">支出</li>
-                <li class="">收入</li>
-            </ul>
-        </div>
-        <div class="label">
-            <ul class="label-current">
-                <li>衣</li>
-                <li>食</li>
-                <li>住</li>
-                <li>行</li>
-            </ul>
-            <div class="label-new">
-                <button>新增标签</button>
-            </div>
-        </div>
-        <div>
-            <label class="remarks">
-                <span class="remarks-name">备注：</span>
-                <input type="text" placeholder="点击写备注...">
-            </label>
-        </div>
+    <layout class-prefix="layout">
         <div class="number-pad">
             <div class="number-pad-output">100</div>
             <div class="number-pad-buttons">
@@ -33,15 +11,47 @@
                 <button>4</button>
                 <button>5</button>
                 <button>6</button>
-                <button>-</button>
                 <button>清空</button>
                 <button>7</button>
                 <button>8</button>
                 <button>9</button>
                 <button class="ok">ok</button>
-                <button>0</button>
+                <button class="zero">0</button>
                 <button>.</button>
             </div>
+        </div>
+        <div>
+            <label class="remarks">
+                <span class="remarks-name">备注：</span>
+                <input type="text" placeholder="点击写备注...">
+            </label>
+        </div>
+        <div class="label">
+            <div class="label-new">
+                <button>新增标签</button>
+            </div>
+            <ul class="label-current">
+                <li>衣</li>
+                <li>食</li>
+                <li>住</li>
+                <li>行</li>
+                <li>住</li>
+                <li>行</li>
+                <li>衣</li>
+                <li>食</li>
+                <li>住</li>
+                <li>行</li>
+                <li>衣</li>
+                <li>食</li>
+                <li>住</li>
+                <li>行</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="types">
+                <li class="selected">支出</li>
+                <li class="">收入</li>
+            </ul>
         </div>
     </layout>
 </template>
@@ -52,14 +62,23 @@
     };
 </script>
 
+<style lang="scss">
+    .layout-content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+</style>
+
 <style lang="scss" scoped>
     @import "~@/assets/style/helper.scss";
+
     .types {
         background-color: $color-highlight;
         display: flex;
         text-align: center;
         flex-direction: row;
         font-size: 24px;
+
         > li {
             width: 50%;
             height: 64px;
@@ -67,9 +86,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            &.selected{
+
+            &.selected {
                 /* border-bottom: 4px solid; 不能用 border 因为会影响字所占的空间 */
-                &::after{
+                &::after {
                     content: '';
                     position: absolute;
                     bottom: 0;
@@ -80,6 +100,7 @@
                 }
             }
         }
+
         > button {
 
         }
@@ -106,13 +127,14 @@
     }
 
     .label {
+        flex-grow: 1;
         padding: 16px;
         font-size: 14px;
-
+        display: flex;
+        flex-direction: column-reverse;
         > .label-current {
-
             display: flex;
-
+            flex-wrap: wrap;
             > li {
                 background-color: $color-assist;
                 $h: 24px;
@@ -122,6 +144,7 @@
                 padding: 0 16px;
                 margin-right: 12px;
                 color: #333;
+                margin-top: 6px;
             }
         }
 
@@ -138,19 +161,63 @@
         }
     }
 
-    .number-pad{
-        .number-pad-output{
+    .number-pad {
+        .number-pad-output {
+            @extend %clearFix;
+            @extend %innerShadow;
             font-size: 36px;
             font-family: Consolas, monospace; /* 先指定一个字体，如果用户电脑上没有该字体，就随便用一个等宽字体 */
             padding: 9px 16px;
             text-align: right;
         }
-        .number-pad-buttons{
-            display: flex;
-            flex-wrap: wrap;
-            > button{
+
+        .number-pad-buttons {
+            > button {
+                @extend %clearFix;
                 width: 25%;
                 height: 64px;
+                float: left;
+                background-color: transparent;
+                border: none;
+
+                &.ok {
+                    height: 64px*2;
+                    float: right;
+                }
+
+                &.zero {
+                    width: 25%*2;
+                }
+
+                $bg: #f2f2f2;
+
+                &:nth-child(1) {
+                    background: $bg;
+                }
+
+                &:nth-child(2), &:nth-child(5) { /* 第二个和第五个 */
+                    background-color: darken($bg, 4%); /* 每个都比 $bg 变暗 4% */
+                }
+
+                &:nth-child(3), &:nth-child(6), &:nth-child(9) {
+                    background-color: darken($bg, 4*2%);
+                }
+
+                &:nth-child(4), &:nth-child(7), &:nth-child(10) {
+                    background-color: darken($bg, 4*3%);
+                }
+
+                &:nth-child(8), &:nth-child(11), &:nth-child(13) {
+                    background-color: darken($bg, 4*4%);
+                }
+
+                &:nth-child(14) {
+                    background-color: darken($bg, 4*5%);
+                }
+
+                &:nth-child(12) {
+                    background-color: darken($bg, 4*6%);
+                }
             }
         }
     }

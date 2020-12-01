@@ -1,6 +1,6 @@
 <template>
-    <div class="nav-wrapper">
-        <div class="content">
+    <div class="layout-wrapper">
+        <div class="content" :class=" classPrefix && `${classPrefix}-content`"> <!-- 字符串要加上单引号，这里的双引号并不属于js ，只有单引号属于 -->
             <slot/>
         </div>
         <Nav/>
@@ -9,19 +9,19 @@
 
 <script lang="ts">
     export default {
+        props: ['classPrefix'],
         name: 'Layout'
     };
 </script>
 
 <style lang="scss" scoped>
-    .nav-wrapper {
+    .layout-wrapper {
         display: flex;
         flex-direction: column;
         height: 100vh;
     }
 
     .content {
-        border: 1px solid blue;
         overflow: auto;
         flex-grow: 1;
     }
