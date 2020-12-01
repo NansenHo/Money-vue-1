@@ -3,7 +3,7 @@
         <NumberPad/>
         <Remarks/>
         <Label/>
-        <Types/>
+        <Types xxx="hi"/>
     </layout>
 </template>
 
