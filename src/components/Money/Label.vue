@@ -1,7 +1,7 @@
 <template>
     <div class="label">
         <div class="label-new">
-            <button>新增标签</button>
+            <button @click="create">新增标签</button>
         </div>
         <ul class="label-current">
             <li v-for="remark in dataSource" :key="remark"
@@ -18,7 +18,7 @@
 
     @Component // @Component 可以省略括号；@Prop 不能省略括号
     export default class Label extends Vue {
-        @Prop(Array) dataSource: string[] | undefined; // :string[] 表明是一个字符串数组
+        @Prop(Array) readonly dataSource: string[] | undefined; // :string[] 表明是一个字符串数组
         // 写 Array 是因为只能写全局的构造函数，别的 Vue & JS 不认识。只有冒号后面的 TS 部分才认识 string[]
         // 括号里也可以什么都不写
         selectedRemarks: string[] = [];
@@ -29,6 +29,17 @@
                 this.selectedRemarks.splice(index, 1);
             } else {
                 this.selectedRemarks.push(remark);
+            }
+        }
+
+        create() {
+            const name = window.prompt('请输入标签名');
+            if (name === '') {
+                window.alert('标签名不能为空');
+            } else {
+                if(this.dataSource){
+                    this.$emit('update:dataSource', [...this.dataSource, name])
+                }
             }
         }
     }

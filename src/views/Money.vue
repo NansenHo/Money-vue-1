@@ -2,7 +2,7 @@
     <layout class-prefix="layout">
         <NumberPad/>
         <Remarks/>
-        <Label :data-source="remarks"/>
+        <Label :data-source.sync="remarks"/>
         <Types/>
     </layout>
 </template>
