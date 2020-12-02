@@ -45,7 +45,7 @@
 
         > .item.selected {
             .icon {
-                color: $color-highlight;
+                color: $color-brand;
             }
         }
 

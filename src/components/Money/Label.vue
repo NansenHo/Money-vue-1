@@ -4,28 +4,34 @@
             <button>新增标签</button>
         </div>
         <ul class="label-current">
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
-            <li>住</li>
-            <li>行</li>
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
+            <li v-for="remark in dataSource" :key="remark"
+                :class="{selected: selectedRemarks.indexOf(remark)>=0}"
+                @click="select(remark)">{{remark}}
+            </li>
         </ul>
     </div>
 </template>
 
 <script lang="ts">
-    export default {
-        name: 'Label'
-    };
+    import Vue from 'vue';
+    import {Component, Prop} from 'vue-property-decorator';
+
+    @Component // @Component 可以省略括号；@Prop 不能省略括号
+    export default class Label extends Vue {
+        @Prop(Array) dataSource: string[] | undefined; // :string[] 表明是一个字符串数组
+        // 写 Array 是因为只能写全局的构造函数，别的 Vue & JS 不认识。只有冒号后面的 TS 部分才认识 string[]
+        // 括号里也可以什么都不写
+        selectedRemarks: string[] = [];
+
+        select(remark: string) {
+            const index = this.selectedRemarks.indexOf(remark);
+            if (index > 0) {
+                this.selectedRemarks.splice(index, 1);
+            } else {
+                this.selectedRemarks.push(remark);
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +58,10 @@
                 margin-right: 12px;
                 color: #333;
                 margin-top: 6px;
+
+                &.selected {
+                    background: $color-brand;
+                }
             }
         }
 

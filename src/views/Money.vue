@@ -2,12 +2,12 @@
     <layout class-prefix="layout">
         <NumberPad/>
         <Remarks/>
-        <Label/>
-        <Types :prop-a=" 333 " />
+        <Label :data-source="remarks"/>
+        <Types/>
     </layout>
 </template>
 
-<script lang="ts">
+<script>
     import NumberPad from '@/components/Money/NumberPad.vue';
     import Types from '@/components/Money/Types.vue';
     import Remarks from '@/components/Money/Remarks.vue';
@@ -16,6 +16,11 @@
     export default {
         name: 'Money',
         components: {Label, Remarks, Types, NumberPad},
+        data(){
+            return{
+                remarks: ['衣', '食', '住', '行', 'Subscribe']
+            }
+        },
     };
 </script>
 

@@ -34,7 +34,7 @@
     @import "~@/assets/style/helper.scss";
 
     .types {
-        background-color: $color-highlight;
+        background-color: $color-brand;
         display: flex;
         text-align: center;
         flex-direction: row;
