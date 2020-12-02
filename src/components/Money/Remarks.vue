@@ -2,8 +2,8 @@
     <div>
         <label class="remarks">
             <span class="remarks-name">备注：</span>
-            <input type="text" :value="value"
-                   @input="onInput"
+            <input type="text"
+                   v-model="value"
                    placeholder="点击写备注...">
         </label>
     </div>
@@ -15,12 +15,7 @@
 
     @Component
     export default class Remarks extends Vue {
-        value: string = '';
-
-        onInput(event: KeyboardEvent) {
-            const input = event.target as HTMLInputElement;
-            this.value = input.value;
-        }
+        value = '';
     }
 </script>
 
