@@ -33,7 +33,9 @@
             const button = (event.target as HTMLButtonElement);
             const input = button.textContent as string;
             //OR const input = button.textContent! // 感叹号就是排除空，其他保留的意思
-            if(this.output.length === 8){return;}
+            if (this.output.length === 8) {
+                return;
+            }
             if (this.output === '0.00') {
                 if ('0123456789'.indexOf(input) >= 0) {
                     this.output = input;
@@ -42,20 +44,23 @@
                 }
                 return;
             }
-            if(this.output.indexOf('.') >= 0 && input === '.'){return;}
+            if (this.output.indexOf('.') >= 0 && input === '.') {
+                return;
+            }
             this.output += input;
         }
 
-        remove(){
-            this.output = this.output.slice(0, -1)
-        }
-        clear(){
-            this.output = this.output.substr(0,-1)
-        }
-        ok(){
-
+        remove() {
+            this.output = this.output.slice(0, -1);
         }
 
+        clear() {
+            this.output = this.output.substr(0, -1);
+        }
+
+        ok() {
+            this.$emit('update:value', this.output);
+        }
     }
 </script>
 

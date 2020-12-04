@@ -4,9 +4,9 @@
             <button @click="create">新增标签</button>
         </div>
         <ul class="label-current">
-            <li v-for="remark in dataSource" :key="remark"
-                :class="{selected: selectedRemarks.indexOf(remark)>=0}"
-                @click="select(remark)">{{remark}}
+            <li v-for="label in dataSource" :key="label"
+                :class="{selected: selectedLabels.indexOf(label)>=0}"
+                @click="select(label)">{{label}}
             </li>
         </ul>
     </div>
@@ -21,15 +21,16 @@
         @Prop(Array) readonly dataSource: string[] | undefined; // :string[] 表明是一个字符串数组
         // 写 Array 是因为只能写全局的构造函数，别的 Vue & JS 不认识。只有冒号后面的 TS 部分才认识 string[]
         // 括号里也可以什么都不写
-        selectedRemarks: string[] = [];
+        selectedLabels: string[] = [];
 
-        select(remark: string) {
-            const index = this.selectedRemarks.indexOf(remark);
+        select(label: string) {
+            const index = this.selectedLabels.indexOf(label);
             if (index > 0) {
-                this.selectedRemarks.splice(index, 1);
+                this.selectedLabels.splice(index, 1);
             } else {
-                this.selectedRemarks.push(remark);
+                this.selectedLabels.push(label);
             }
+            this.$emit('update:value', this.selectedLabels)
         }
 
         create() {
