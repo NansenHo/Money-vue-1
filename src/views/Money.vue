@@ -16,7 +16,7 @@
     import Label from '@/components/Money/Label.vue';
     import {Component, Watch} from 'vue-property-decorator';
 
-    window.localStorage.setItem('version', '0.0.1'); // 数据库版本
+    const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
 
     type Record = { // ts 类型声明
         labels: string[],
@@ -32,7 +32,7 @@
     })
     export default class Money extends Vue {
         labels = ['衣', '食', '住', '行', 'Subscribe'];
-        recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+        recordList: Record[] = recordList;
 
         record: Record = {labels: [], remarks: '', type: '-', amount: 0};
 
