@@ -4,6 +4,7 @@ import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import Statistics from '@/views/Statistics.vue';
 import NotFound from '@/views/NotFound.vue';
+import EditLabels from '@/views/EditLabels.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,10 @@ const routes: Array<RouteConfig> = [
     {
         path: '*', // * 即除了上面的路径之外的所有
         component: NotFound
+    },
+    {
+        path: '/labels/edit',
+        component: EditLabels
     }
 ];
 
