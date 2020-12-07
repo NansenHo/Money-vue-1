@@ -17,5 +17,6 @@
         line-height: 1.5; /* 默认行高 */
         font-size: 16px;
         font-family: $font-hei;
+        background-color: rgb(245,245,245);
     }
 </style>

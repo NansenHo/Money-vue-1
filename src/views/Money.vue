@@ -14,15 +14,17 @@
     import Remarks from '@/components/Money/Remarks.vue';
     import Label from '@/components/Money/Label.vue';
     import {Component, Watch} from 'vue-property-decorator';
-    import {model} from '@/model';
+    import {recordListModel} from '@/models/recordList-model';
+    import {labelListModel} from '@/models/labelLIst-model';
 
-    const recordList = model.fetch();
+    const recordList = recordListModel.fetch();
+    const labelList = labelListModel.fetch();
 
     @Component({
         components: {Label, Remarks, Types, NumberPad},
     })
     export default class Money extends Vue {
-        labels = ['衣', '食', '住', '行', 'Subscribe'];
+        labels = labelList;
         recordList: RecordItem[] = recordList;
 
         record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
@@ -40,14 +42,14 @@
         }
 
         saveRecord() {
-            const record2: RecordItem = model.clone(this.record);
+            const record2: RecordItem = recordListModel.clone(this.record);
             record2.createdAt = new Date();
             this.recordList.push(record2);
         }
 
         @Watch('recordList')
         onRecordListChange() {
-            model.save(this.recordList);
+            recordListModel.save(this.recordList);
         }
     }
 </script>
