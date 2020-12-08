@@ -15,7 +15,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
-    import {labelListModel} from '@/models/labelLIst-model';
+    import {labelListModel} from '@/models/labelList-model';
 
     labelListModel.fetch();
     @Component

@@ -9,7 +9,9 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 @Component
 export default class EditLabels extends Vue{
-
+  created(){
+    console.log(this.$route.params);
+  }
 }
 </script>
 
