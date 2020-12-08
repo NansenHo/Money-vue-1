@@ -1,21 +1,26 @@
 <template>
     <div>
         <label class="remarks">
-            <span class="remarks-name">备注：</span>
+            <span class="remarks-name">{{this.fieldName}}</span>
             <input type="text"
                    v-model="value"
-                   placeholder="点击写备注...">
+                   placeholder="点击写备注..."
+                   :placeholder="this.placeholder">
         </label>
     </div>
 </template>
 
 <script lang="ts">
     import Vue from 'vue';
-    import {Component, Watch} from 'vue-property-decorator';
+    import {Component, Prop, Watch} from 'vue-property-decorator';
 
     @Component
     export default class Remarks extends Vue {
         value = '';
+
+        @Prop({required: true}) fieldName!: string; // required: true 表示必填
+        @Prop({default:''}) placeholder?: string; // ? 表示 placeholder 有可能不存在
+
         @Watch('value')
         onValueChange(value: string){
             this.$emit('update:value',value);
