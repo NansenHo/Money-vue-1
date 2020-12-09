@@ -9,7 +9,7 @@
       </router-link>
     </div>
     <div class="createLabel-wrapper">
-      <button class="createLabel" @click="createLabel">新建标签</button>
+      <Button class="createLabel" @click="createLabel">新建标签</Button>
     </div>
   </layout>
 </template>
@@ -18,9 +18,12 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {labelListModel} from '@/models/labelList-model';
+import Button from '@/components/Button.vue';
 
 labelListModel.fetch();
-@Component
+@Component({
+  components: {Button}
+})
 export default class Labels extends Vue {
   labels = labelListModel.data;
 

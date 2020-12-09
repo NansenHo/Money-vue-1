@@ -32,7 +32,6 @@
     @import "~@/assets/style/helper.scss";
 
     .remarks {
-        background-color: $color-assist;
         display: block;
         font-size: 14px;
         padding-left: 16px; /* 所有的高度用 input 来撑 */
@@ -40,10 +39,11 @@
         align-items: center;
 
         .remarks-name {
+          padding-right: 16px;
         }
 
         input {
-            padding: 10px 0;
+            height: 40px;
             flex-grow: 1;
             background-color: transparent;
             border: none;
