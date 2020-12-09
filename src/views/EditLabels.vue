@@ -25,6 +25,7 @@ import Button from '@/components/Button.vue';
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
+  label?: {id: string, name: string} = undefined;
   created() {
     const id = this.$route.params.id;
     labelListModel.fetch();
@@ -35,6 +36,16 @@ export default class EditLabels extends Vue {
     } else {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
 
+    }
+  }
+
+  remove(){
+    if(this.label) {
+      if(labelListModel.remove(this.label.id)) {
+        this.$router.back()
+      } else {
+        window.alert('删除失败')
+      }
     }
   }
 }

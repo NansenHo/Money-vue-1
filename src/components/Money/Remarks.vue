@@ -3,7 +3,8 @@
         <label class="remarks">
             <span class="remarks-name">{{this.fieldName}}</span>
             <input type="text"
-                   v-model="value"
+                   :value="value"
+                   @input="onValueChange($event.target.value)"
                    placeholder="点击写备注..."
                    :placeholder="this.placeholder">
         </label>
@@ -16,7 +17,7 @@
 
     @Component
     export default class Remarks extends Vue {
-        value = '';
+        @Prop({default: ''}) readonly value!: string
 
         @Prop({required: true}) fieldName!: string; // required: true 表示必填
         @Prop({default:''}) placeholder?: string; // ? 表示 placeholder 有可能不存在
