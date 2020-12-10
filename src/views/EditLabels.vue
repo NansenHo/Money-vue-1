@@ -6,7 +6,9 @@
       <span class="right-icon"></span>
     </div>
     <div class="remarks-wrapper">
-      <Remarks field-name="标签名：" placeholder="请输入标签名"/>
+      <Remarks :value="label.name"
+               @update:value="updateLabel"
+               field-name="标签名：" placeholder="请输入标签名"/>
     </div>
     <div class="button-wrapper">
       <Button @click="remove">删除标签</Button>
@@ -25,26 +27,30 @@ import Button from '@/components/Button.vue';
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
-  label?: {id: string, name: string} = undefined;
+  label?: { id: string, name: string } = undefined; // label 初始值为 undefined
+
   created() {
     const id = this.$route.params.id;
     labelListModel.fetch();
     const labels = labelListModel.data;
     const label = labels.filter(l => l.id === id)[0]; // filter 返回一个数组
     if (label) {
-      console.log(label);
+      this.label = label;
     } else {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
 
     }
   }
+  updateLabel(event: InputEvent){
 
-  remove(){
-    if(this.label) {
-      if(labelListModel.remove(this.label.id)) {
-        this.$router.back()
-      } else {
-        window.alert('删除失败')
+  }
+
+  remove() {
+    if (this.label) {
+      if (labelListModel.remove(this.label.id)) {
+        this.$router.back();
+      } else
+        window.alert('删除失败');
       }
     }
   }
@@ -61,6 +67,7 @@ export default class EditLabels extends Vue {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   > .left-icon {
     width: 16px;
     height: 16px;
@@ -75,11 +82,13 @@ export default class EditLabels extends Vue {
 
   }
 }
-.remarks-wrapper{
+
+.remarks-wrapper {
   margin-top: 8px;
   background-color: white;
 }
-.button-wrapper{
+
+.button-wrapper {
   text-align: center;
   padding: 16px;
   margin-top: 44-16px;
