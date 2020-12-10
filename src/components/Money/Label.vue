@@ -4,9 +4,9 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="label-current">
-      <li v-for="label in dataSource" :key="label"
+      <li v-for="label in dataSource" :key="label.id"
           :class="{selected: selectedLabels.indexOf(label)>=0}"
-          @click="select(label)">{{ label }}
+          @click="toggle(label)">{{label.name}}
       </li>
     </ul>
   </div>
@@ -23,9 +23,9 @@ export default class Label extends Vue {
   // 括号里也可以什么都不写
   selectedLabels: string[] = [];
 
-  select(label: string) {
+  toggle(label: string) {
     const index = this.selectedLabels.indexOf(label);
-    if (index > 0) {
+    if (index >= 0) {
       this.selectedLabels.splice(index, 1);
     } else {
       this.selectedLabels.push(label);
