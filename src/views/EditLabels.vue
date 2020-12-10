@@ -54,7 +54,7 @@ export default class EditLabels extends Vue {
       }
     }
   }
-}
+
 </script>
 
 <style lang="scss" scoped>
