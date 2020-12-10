@@ -1,3 +1,5 @@
+import createId from '@/lib/createId';
+
 const localStorageKeyName = 'labelList';
 type Label = {
     id: string
@@ -18,13 +20,12 @@ const labelListModel: LabelListModel = {
         this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
         return this.data;
     },
-    create(name) {
+    create(name: string) {
         // this.data = [{id:'1', name:'1'}, {id:'2',name:'2'}]
         const names = this.data.map(item => item.name);
-        if (names.indexOf(name) >= 0) {
-            return 'duplicated';
-        }
-        this.data.push({id: name, name: name});
+        if (names.indexOf(name) >= 0) {return 'duplicated';}
+        const id = createId().toString();
+        this.data.push({id, name: name});
         this.save();
         return 'success';
     },

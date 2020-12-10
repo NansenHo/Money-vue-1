@@ -51,8 +51,9 @@ export default class EditLabels extends Vue {
     if (this.label) {
       if (labelListModel.remove(this.label.id)) {
         this.$router.back();
-      } else
+      } else {
         window.alert('删除失败');
+      }
     }
   }
 
