@@ -6,7 +6,7 @@
                    :value="value"
                    @input="onValueChange($event.target.value)"
                    placeholder="点击写备注..."
-                   :placeholder="this.placeholder">
+                   :placeholder="placeholder">
         </label>
     </div>
 </template>
@@ -22,7 +22,6 @@
         @Prop({required: true}) fieldName!: string; // required: true 表示必填
         @Prop({default:''}) placeholder?: string; // ? 表示 placeholder 有可能不存在
 
-        @Watch('value')
         onValueChange(value: string){
             this.$emit('update:value',value);
         }
