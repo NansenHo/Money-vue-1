@@ -1,13 +1,13 @@
 <template>
   <layout>
     <div class="navBar">
-      <Icon class="left-icon" name="left"/>
+      <Icon class="left-icon" name="left" @click="goBack"/>
       <span class="title">编辑标签</span>
       <span class="right-icon"></span>
     </div>
     <div class="remarks-wrapper">
       <Remarks :value="label.name"
-               @update:value="updateLabel"
+               @update:value="update"
                field-name="标签名：" placeholder="请输入标签名"/>
     </div>
     <div class="button-wrapper">
@@ -38,11 +38,13 @@ export default class EditLabels extends Vue {
       this.label = label;
     } else {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
-
     }
   }
-  updateLabel(event: InputEvent){
 
+  update(name: string) {
+    if (this.label) {
+      labelListModel.update(this.label.id, name);
+    }
   }
 
   remove() {
@@ -51,9 +53,13 @@ export default class EditLabels extends Vue {
         this.$router.back();
       } else
         window.alert('删除失败');
-      }
     }
   }
+
+  goBack() {
+    this.$router.back();
+  }
+}
 
 </script>
 
