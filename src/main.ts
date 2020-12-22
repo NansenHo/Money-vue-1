@@ -7,6 +7,7 @@ import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import {labelListModel} from '@/models/labelList-model';
+import {recordListModel} from '@/models/recordList-model';
 
 Vue.config.productionTip = false;
 
@@ -14,6 +15,11 @@ Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
+// record store
+window.recordList = recordListModel.fetch();
+window.createRecord = (record: RecordItem) => recordListModel.create(record);
+
+// label store
 window.labelList = labelListModel.fetch();
 window.findLabel = (id: string) => {
     return window.labelList.filter(l => l.id === id)[0];

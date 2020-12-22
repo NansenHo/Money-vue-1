@@ -29,4 +29,6 @@ interface Window {
     updateLabel: (id:string, name:string)=>'success' | 'not found' | 'duplicated',
     // 简略写法：updateLabel: LabelListModel['update'],
     findLabel: (id: string)=>Label,
+    recordList: RecordItem[],
+    createRecord: (record: RecordItem)=>void,
 }

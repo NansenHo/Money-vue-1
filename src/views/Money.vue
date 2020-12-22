@@ -16,17 +16,14 @@ import NumberPad from '@/components/Money/NumberPad.vue';
 import Types from '@/components/Money/Types.vue';
 import Remarks from '@/components/Money/Remarks.vue';
 import Label from '@/components/Money/Label.vue';
-import {Component, Watch} from 'vue-property-decorator';
-import {recordListModel} from '@/models/recordList-model';
-
-const recordList = recordListModel.fetch();
+import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {Label, Remarks, Types, NumberPad},
 })
 export default class Money extends Vue {
   labels = window.labelList;
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
 
   record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
 
@@ -43,13 +40,9 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    recordListModel.create(this.record);
+    window.createRecord(this.record);
   }
 
-  @Watch('recordList')
-  onRecordListChange() {
-    recordListModel.save();
-  }
 }
 </script>
 
