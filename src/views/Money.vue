@@ -1,10 +1,10 @@
 <template>
   <layout class-prefix="layout">
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
-      <Remarks field-name="备注："
-               placeholder="点击写备注..."
-               @update:value="onUpdateRemarks"
-      />
+    <Remarks field-name="备注："
+             placeholder="点击写备注..."
+             @update:value="onUpdateRemarks"
+    />
     <Label :value="record.type" :data-source.sync="labels" @update:value="onUpdateLabels"/>
     <Types :value.sync="record.type"/>
   </layout>
@@ -45,14 +45,12 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createdAt = new Date();
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
 
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
