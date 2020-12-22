@@ -1,20 +1,23 @@
-import Vue from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import './registerServiceWorker';
+import router from './router';
+import store from './store';
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
+import {labelListModel} from '@/models/labelList-model';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.component('Nav', Nav)
+Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
-Vue.component('Icon', Icon)
+Vue.component('Icon', Icon);
+
+window.labelList = labelListModel.fetch();
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app');

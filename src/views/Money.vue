@@ -21,13 +21,12 @@ import {recordListModel} from '@/models/recordList-model';
 import {labelListModel} from '@/models/labelList-model';
 
 const recordList = recordListModel.fetch();
-const labelList = labelListModel.fetch();
 
 @Component({
   components: {Label, Remarks, Types, NumberPad},
 })
 export default class Money extends Vue {
-  labels = labelList;
+  labels = window.labelList;
   recordList: RecordItem[] = recordList;
 
   record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
