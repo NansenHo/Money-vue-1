@@ -17,10 +17,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {labelListModel} from '@/models/labelList-model';
 import Button from '@/components/Button.vue';
 
-labelListModel.fetch();
 @Component({
   components: {Button}
 })

@@ -15,6 +15,9 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 window.labelList = labelListModel.fetch();
+window.findLabel = (id: string) => {
+    return window.labelList.filter(l => l.id === id)[0];
+}
 window.createLabel = (name: string) => {
     const message = labelListModel.create(name);
     if (message === 'duplicated') {
@@ -23,7 +26,12 @@ window.createLabel = (name: string) => {
         window.alert('添加成功');
     }
 }
-
+window.removeLabel = (id: string) => {
+    return labelListModel.remove(id);
+}
+window.updateLabel = (id: string, name: string) => {
+    return labelListModel.update(id, name);
+}
 
 new Vue({
     router,

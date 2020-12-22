@@ -24,5 +24,9 @@ type LabelListModel = {
 
 interface Window {
     labelList: Label[],
-    createLabel: (name:string)=>void
+    createLabel: (name:string)=>void,
+    removeLabel: (id:string)=>boolean,
+    updateLabel: (id:string, name:string)=>'success' | 'not found' | 'duplicated',
+    // 简略写法：updateLabel: LabelListModel['update'],
+    findLabel: (id: string)=>Label,
 }

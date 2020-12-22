@@ -19,37 +19,32 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {labelListModel} from '@/models/labelList-model';
 import Remarks from '@/components/Money/Remarks.vue';
 import Button from '@/components/Button.vue';
+import Label from '@/components/Money/Label.vue';
 
 @Component({
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
-  label?: { id: string, name: string } = undefined; // label 初始值为 undefined
+  label?: Label = undefined; // label 初始值为 undefined
 
   created() {
-    const id = this.$route.params.id;
-    labelListModel.fetch();
-    const labels = labelListModel.data;
-    const label = labels.filter(l => l.id === id)[0]; // filter 返回一个数组
-    if (label) {
-      this.label = label;
-    } else {
+    this.label = window.findLabel(this.$route.params.id);
+    if (!this.label) {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
     }
   }
 
   update(name: string) {
     if (this.label) {
-      labelListModel.update(this.label.id, name);
+      window.updateLabel(this.label.id, name);
     }
   }
 
   remove() {
     if (this.label) {
-      if (labelListModel.remove(this.label.id)) {
+      if (window.removeLabel(this.label.id)) {
         this.$router.back();
       } else {
         window.alert('删除失败');

@@ -18,7 +18,6 @@ import Remarks from '@/components/Money/Remarks.vue';
 import Label from '@/components/Money/Label.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import {recordListModel} from '@/models/recordList-model';
-import {labelListModel} from '@/models/labelList-model';
 
 const recordList = recordListModel.fetch();
 
