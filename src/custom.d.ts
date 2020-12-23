@@ -23,12 +23,15 @@ type LabelListModel = {
 }
 
 interface Window {
-    labelList: Label[],
-    createLabel: (name:string)=>void,
-    removeLabel: (id:string)=>boolean,
-    updateLabel: (id:string, name:string)=>'success' | 'not found' | 'duplicated',
-    // 简略写法：updateLabel: LabelListModel['update'],
-    findLabel: (id: string)=>Label,
-    recordList: RecordItem[],
-    createRecord: (record: RecordItem)=>void,
+//     store:{
+//         labelList: Label[],
+//         createLabel: (name:string)=>void,
+//         removeLabel: (id:string)=>boolean,
+//         updateLabel: (id:string, name:string)=>'success' | 'not found' | 'duplicated',
+//         // 简略写法：updateLabel: LabelListModel['update'],
+//         findLabel: (id: string)=>Label,
+//         recordList: RecordItem[],
+//         createRecord: (record: RecordItem)=>void,
+//     }
+//     ts 可以自动推测出 store 的类型，所以不用写了，这样的情况在 ts 里还很多
 }

@@ -22,6 +22,7 @@ import {Component} from 'vue-property-decorator';
 import Remarks from '@/components/Money/Remarks.vue';
 import Button from '@/components/Button.vue';
 import Label from '@/components/Money/Label.vue';
+import store from '@/store/index2';
 
 @Component({
   components: {Button, Remarks}
@@ -30,7 +31,7 @@ export default class EditLabels extends Vue {
   label?: Label = undefined; // label 初始值为 undefined
 
   created() {
-    this.label = window.findLabel(this.$route.params.id);
+    this.label = store.findLabel(this.$route.params.id);
     if (!this.label) {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
     }
@@ -38,13 +39,13 @@ export default class EditLabels extends Vue {
 
   update(name: string) {
     if (this.label) {
-      window.updateLabel(this.label.id, name);
+      store.updateLabel(this.label.id, name);
     }
   }
 
   remove() {
     if (this.label) {
-      if (window.removeLabel(this.label.id)) {
+      if (store.removeLabel(this.label.id)) {
         this.$router.back();
       } else {
         window.alert('删除失败');
