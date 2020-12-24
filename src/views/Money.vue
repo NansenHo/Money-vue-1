@@ -18,6 +18,9 @@ import Remarks from '@/components/Money/Remarks.vue';
 import Label from '@/components/Money/Label.vue';
 import {Component} from 'vue-property-decorator';
 import store from '@/store/index2';
+// import store2 from '@/store/index2';
+//
+// console.log(store === store2);
 
 @Component({
   components: {Label, Remarks, Types, NumberPad},

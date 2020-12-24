@@ -1,30 +1,13 @@
-import {recordListModel} from '@/models/recordList-model';
-import {labelListModel} from '@/models/labelList-model';
+import recordStore from '@/store/recordStore';
+import labelStore from '@/store/labelStore';
+
+// console.log('index2 执行了一次')
 
 const store = {
-    // record store
-    recordList: recordListModel.fetch(),
-    createRecord: (record: RecordItem) => recordListModel.create(record),
-
-    // label store
-    labelList: labelListModel.fetch(),
-    findLabel (id: string){
-        return this.labelList.filter(l => l.id === id)[0];
-    },
-    createLabel: (name: string) => {
-        const message = labelListModel.create(name);
-        if (message === 'duplicated') {
-            window.alert('标签名重复了');
-        } else {
-            window.alert('添加成功');
-        }
-    },
-    removeLabel: (id: string) => {
-        return labelListModel.remove(id);
-    },
-    updateLabel: (id: string, name: string) => {
-        return labelListModel.update(id, name);
-    },
+    ...recordStore,
+    ...labelStore // 浅拷贝，直接把地址复制过来
 };
+
+// console.log(store); // 查看 store 的所有 API
 
 export default store;
