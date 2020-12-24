@@ -21,14 +21,13 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Remarks from '@/components/Money/Remarks.vue';
 import Button from '@/components/Button.vue';
-import Label from '@/components/Money/Label.vue';
 import store from '@/store/index2';
 
 @Component({
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
-  label?: Label = undefined; // label 初始值为 undefined
+  label?: { id: string, name: string }  = undefined; // label 初始值为 undefined
 
   created() {
     this.label = store.findLabel(this.$route.params.id);
