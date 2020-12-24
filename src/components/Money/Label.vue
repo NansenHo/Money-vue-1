@@ -4,9 +4,9 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="label-current">
-      <li v-for="label in dataSource" :key="label.id"
+      <li v-for="label in labelList" :key="label.id"
           :class="{selected: selectedLabels.indexOf(label)>=0}"
-          @click="toggle(label)">{{label.name}}
+          @click="toggle(label)">{{ label.name }}
       </li>
     </ul>
   </div>
@@ -15,12 +15,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import store from '@/store/index2';
 
 @Component // @Component 可以省略括号；@Prop 不能省略括号
 export default class Label extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined; // :string[] 表明是一个字符串数组
-  // 写 Array 是因为只能写全局的构造函数，别的 Vue & JS 不认识。只有冒号后面的 TS 部分才认识 string[]
-  // 括号里也可以什么都不写
+  labelList = store.fetchLabels();
   selectedLabels: string[] = [];
 
   toggle(label: string) {
@@ -35,13 +34,8 @@ export default class Label extends Vue {
 
   create() {
     const name = window.prompt('请输入标签名');
-    if (name === '') {
-      window.alert('标签名不能为空');
-    } else {
-      if (this.dataSource) {
-        this.$emit('update:dataSource', [...this.dataSource, name]);
-      }
-    }
+    if (!name) {return window.alert('标签名不能为空');}
+    store.createLabel(name);
   }
 }
 </script>

@@ -5,7 +5,7 @@
              placeholder="点击写备注..."
              @update:value="onUpdateRemarks"
     />
-    <Label :value="record.type" :data-source.sync="labels" @update:value="onUpdateLabels"/>
+    <Label/>
     <Types :value.sync="record.type"/>
   </layout>
 </template>
@@ -24,16 +24,15 @@ import store from '@/store/index2';
 
 @Component({
   components: {Label, Remarks, Types, NumberPad},
+  computed: {
+    recordList() {
+      return store.recordList;
+    }
+  }
 })
 export default class Money extends Vue {
-  labels = store.labelList;
-  recordList = store.recordList;
 
   record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
-
-  onUpdateLabels(value: string[]) {
-    this.record.labels = value;
-  }
 
   onUpdateRemarks(value: string) {
     this.record.remarks = value;
