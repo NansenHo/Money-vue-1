@@ -17,7 +17,7 @@ import Types from '@/components/Money/Types.vue';
 import Remarks from '@/components/Money/Remarks.vue';
 import Label from '@/components/Money/Label.vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
+import store from '@/store/index';
 // import store2 from '@/store/index2';
 //
 // console.log(store === store2);
@@ -26,13 +26,15 @@ import store from '@/store/index2';
   components: {Label, Remarks, Types, NumberPad},
   computed: {
     recordList() {
-      return store.recordList;
+      return this.$store.state.recordList;
     }
   }
 })
 export default class Money extends Vue {
-
   record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
+  created(){
+    this.$store.commit('fetchRecords')
+  }
 
   onUpdateRemarks(value: string) {
     this.record.remarks = value;
@@ -43,9 +45,8 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit('createRecord', this.record);
   }
-
 }
 </script>
 

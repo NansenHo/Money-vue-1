@@ -15,11 +15,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import store from '@/store/index2';
 
-@Component // @Component 可以省略括号；@Prop 不能省略括号
+@Component({
+  computed: {
+    labelList() {
+      // TODO
+      // return this.$store.fetchLabels();
+      return []
+    }
+  }
+})
 export default class Label extends Vue {
-  labelList = store.fetchLabels();
   selectedLabels: string[] = [];
 
   toggle(label: string) {
@@ -35,7 +41,8 @@ export default class Label extends Vue {
   create() {
     const name = window.prompt('请输入标签名');
     if (!name) {return window.alert('标签名不能为空');}
-    store.createLabel(name);
+    // TODO
+    // store.createLabel(name);
   }
 }
 </script>

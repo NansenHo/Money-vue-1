@@ -3,7 +3,7 @@
     <div class="navBar">
       <Icon class="left-icon" name="left" @click="goBack"/>
       <span class="title">编辑标签</span>
-      <span class="right-icon"></span>
+      <span class="right-icon" />
     </div>
     <div class="remarks-wrapper">
       <Remarks :value="label.name"
@@ -21,7 +21,6 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Remarks from '@/components/Money/Remarks.vue';
 import Button from '@/components/Button.vue';
-import store from '@/store/index2';
 
 @Component({
   components: {Button, Remarks}
@@ -30,7 +29,8 @@ export default class EditLabels extends Vue {
   label?: { id: string, name: string }  = undefined; // label 初始值为 undefined
 
   created() {
-    this.label = store.findLabel(this.$route.params.id);
+    // TODO
+    // this.label = store.findLabel(this.$route.params.id);
     if (!this.label) {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
     }
@@ -38,17 +38,20 @@ export default class EditLabels extends Vue {
 
   update(name: string) {
     if (this.label) {
-      store.updateLabel(this.label.id, name);
+      // TODO
+      // store.updateLabel(this.label.id, name);
     }
   }
 
   remove() {
     if (this.label) {
-      if (store.removeLabel(this.label.id)) {
-        this.$router.back();
-      } else {
-        window.alert('删除失败');
-      }
+      return
+      // TODO
+      // if (store.removeLabel(this.label.id)) {
+      //   this.$router.back();
+      // } else {
+      //   window.alert('删除失败');
+      // }
     }
   }
 
