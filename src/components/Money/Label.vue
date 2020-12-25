@@ -14,19 +14,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 
 @Component({
   computed: {
     labelList() {
-      // TODO
-      // return this.$store.fetchLabels();
-      return []
+      return this.$store.state.labelList;
     }
   }
 })
 export default class Label extends Vue {
   selectedLabels: string[] = [];
+
+  created() {
+    this.$store.commit('fetchLabels');
+  }
 
   toggle(label: string) {
     const index = this.selectedLabels.indexOf(label);
@@ -41,8 +43,7 @@ export default class Label extends Vue {
   create() {
     const name = window.prompt('请输入标签名');
     if (!name) {return window.alert('标签名不能为空');}
-    // TODO
-    // store.createLabel(name);
+    this.$store.commit('createLabel', name);
   }
 }
 </script>
