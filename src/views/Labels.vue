@@ -18,22 +18,22 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
+import {mixins} from "vue-class-component";
+import LabelHelper from "@/mixins/LabelHelper";
 
 @Component({
   components: {Button},
-})
-export default class Labels extends Vue {
-  // TODO
-  labels = [] // store.labelList;
-
-  createLabel() {
-    const name = window.prompt('请输入标签名');
-    if (name) {
-      // TODO
-      // store.createLabel(name);
+  computed: {
+    labels() {
+      return this.$store.state.labelList;
     }
   }
-};
+})
+export default class Labels extends mixins(LabelHelper) {
+  beforeCreate() {
+    this.$store.commit('fetchLabels')
+  }
+}
 </script>
 
 <style lang="scss" scoped>
