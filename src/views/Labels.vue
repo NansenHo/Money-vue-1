@@ -18,20 +18,19 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
-import {mixins} from "vue-class-component";
-import LabelHelper from "@/mixins/LabelHelper";
+import {mixins} from 'vue-class-component';
+import LabelHelper from '@/mixins/LabelHelper';
 
 @Component({
   components: {Button},
-  computed: {
-    labels() {
-      return this.$store.state.labelList;
-    }
-  }
 })
 export default class Labels extends mixins(LabelHelper) {
+  get labels() {
+    return this.$store.state.labelList;
+  }
+
   beforeCreate() {
-    this.$store.commit('fetchLabels')
+    this.$store.commit('fetchLabels');
   }
 }
 </script>

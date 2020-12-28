@@ -24,16 +24,16 @@ import store from '@/store/index';
 
 @Component({
   components: {Label, Remarks, Types, NumberPad},
-  computed: {
-    recordList() {
-      return this.$store.state.recordList;
-    }
-  }
 })
 export default class Money extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
   record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
-  created(){
-    this.$store.commit('fetchRecords')
+
+  created() {
+    this.$store.commit('fetchRecords');
   }
 
   onUpdateRemarks(value: string) {

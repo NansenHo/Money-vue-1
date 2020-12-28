@@ -18,15 +18,13 @@ import {Component} from 'vue-property-decorator';
 import {mixins} from "vue-class-component";
 import LabelHelper from "@/mixins/LabelHelper";
 
-@Component({
-  computed: {
-    labelList() {
-      return this.$store.state.labelList;
-    }
-  }
-})
+@Component
 export default class Label extends mixins(LabelHelper) {
   selectedLabels: string[] = [];
+
+  get labelList(){
+    return this.$store.state.labelList;
+  }
 
   created() {
     this.$store.commit('fetchLabels');
