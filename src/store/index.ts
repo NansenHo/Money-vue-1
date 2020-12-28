@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from '@/lib/createId';
+import router from '@/router';
 
 Vue.use(Vuex);
 
@@ -18,11 +19,25 @@ const store = new Vuex.Store({
         currentLabel: undefined
     } as RootState,
     mutations: {
-        setCurrentLabel(state, id: string){
+        setCurrentLabel(state, id: string) {
             state.currentLabel = state.labelList.filter(t => t.id === id)[0];
         },
+        updateLabel(state, payload: { id: string, name: string }) {
+            const {id, name} = payload;
+            const idList = state.labelList.map(item => item.id);
+            if (idList.indexOf(id) >= 0) {
+                const names = state.labelList.map(item => item.name);
+                if (names.indexOf(name) >= 0) {
+                    window.alert('标签名已存在')
+                } else {
+                    const label = state.labelList.filter(item => item.id === id)[0];
+                    label.name = name;
+                    store.commit('saveLabels');
+                }
+            }
+        },
         fetchRecords(state) {
-            state.recordList = JSON.parse(window.localStorage.getItem('recordList   ') || '[]') as RecordItem[];
+            state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
         },
         createRecord(state, record) {
             const record2: RecordItem = clone(record);
@@ -47,10 +62,10 @@ const store = new Vuex.Store({
             }
             const id = createId().toString();
             state.labelList.push({id, name: name});
-            store.commit('saveLabels')
+            store.commit('saveLabels');
             window.alert('添加成功');
         },
-        saveLabels(state){
+        saveLabels(state) {
             window.localStorage.setItem('labelList',
                 JSON.stringify(state.labelList));
         }

@@ -3,10 +3,10 @@
     <div class="navBar">
       <Icon class="left-icon" name="left" @click="goBack"/>
       <span class="title">编辑标签</span>
-      <span class="right-icon" />
+      <span class="right-icon"/>
     </div>
     <div class="remarks-wrapper">
-      <Remarks :value="label.name"
+      <Remarks :value="currentLabel.name"
                @update:value="update"
                field-name="标签名：" placeholder="请输入标签名"/>
     </div>
@@ -26,27 +26,32 @@ import Button from '@/components/Button.vue';
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
-  get label(){
-    return this.$store.state.currentLabel
+  get currentLabel() {
+    return this.$store.state.currentLabel;
   }
+
   created() {
     const id = this.$route.params.id;
-    this.$store.commit('setCurrentLabel', id)
-    if (!this.label) {
+    this.$store.commit('fetchLabels');
+    this.$store.commit('setCurrentLabel', id);
+    if (!this.currentLabel) {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
     }
   }
 
   update(name: string) {
-    if (this.label) {
-      // TODO
-      // store.updateLabel(this.label.id, name);
+    if (this.currentLabel) {
+      if (this.currentLabel) {
+        this.$store.commit('updateLabel', {
+          id: this.currentLabel.id, name
+        });
+      }
     }
   }
 
   remove() {
-    if (this.label) {
-      return
+    if (this.currentLabel) {
+      return;
       // TODO
       // if (store.removeLabel(this.label.id)) {
       //   this.$router.back();
