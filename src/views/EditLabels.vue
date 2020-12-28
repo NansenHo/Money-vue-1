@@ -26,11 +26,12 @@ import Button from '@/components/Button.vue';
   components: {Button, Remarks}
 })
 export default class EditLabels extends Vue {
-  label?: { id: string, name: string }  = undefined; // label 初始值为 undefined
-
+  get label(){
+    return this.$store.state.currentLabel
+  }
   created() {
-    // TODO
-    // this.label = store.findLabel(this.$route.params.id);
+    const id = this.$route.params.id;
+    this.$store.commit('setCurrentLabel', id)
     if (!this.label) {
       this.$router.replace('/404'); // 防止用户无法回退，不用 push 用 replace
     }
