@@ -28,12 +28,28 @@ const store = new Vuex.Store({
             if (idList.indexOf(id) >= 0) {
                 const names = state.labelList.map(item => item.name);
                 if (names.indexOf(name) >= 0) {
-                    window.alert('标签名已存在')
+                    window.alert('标签名已存在');
                 } else {
                     const label = state.labelList.filter(item => item.id === id)[0];
                     label.name = name;
                     store.commit('saveLabels');
                 }
+            }
+        },
+        removeLabel(state, id: string) {
+            let index = -1;
+            for (let i = 0; i < state.labelList.length; i++) {
+                if (state.labelList[i].id === id) {
+                    index = i;
+                    break;
+                }
+            }
+            if(index>=0){
+                state.labelList.splice(index, 1);
+                store.commit('saveLabels');
+                router.back();
+            } else {
+                window.alert('删除失败');
             }
         },
         fetchRecords(state) {

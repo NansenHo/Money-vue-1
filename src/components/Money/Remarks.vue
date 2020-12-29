@@ -4,7 +4,7 @@
             <span class="remarks-name">{{this.fieldName}}</span>
             <input type="text"
                    :value="value"
-                   @input="onValueChange($event.target.value)"
+                   @change="onValueChange($event.target.value)"
                    placeholder="点击写备注..."
                    :placeholder="placeholder">
         </label>
