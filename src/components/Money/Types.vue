@@ -1,11 +1,11 @@
 <template>
     <div>
         <ul class="types">
-            <li :class="value === '-' && 'selected'"
+            <li :class="{[classPrefix + '-item']: classPrefix, selected: value === '-'}"
                 @click="selectType('-')">支出
             </li>
             <!-- 如果 type 等于 - ，那 class 为 selected -->
-            <li :class="value === '+' && 'selected'"
+            <li :class="{[classPrefix + '-item']: classPrefix, selected: value === '+'}"
                 @click="selectType('+')">收入
             </li>
         </ul>
@@ -17,7 +17,8 @@
     import {Component, Prop, Watch} from 'vue-property-decorator'; // 尽管这个库不是 Vue 官方的 TS 支持库，但这个库更好用。
     @Component // 装饰器（@ 开头的） @Component帮我做一些必要的处理，就是我们比 js 少写的那些部分
     export default class Types extends Vue {
-        @Prop() readonly value!: string;
+        @Prop(String) readonly value!: string;
+        @Prop(String) classPrefix?: string;
 
         // - 表示支出，+ 表示收入
         selectType(type: string) { // type 只能是 - 或者 + ，要说明 type 的类型，写好参数的类型
