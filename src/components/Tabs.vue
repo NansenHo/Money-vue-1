@@ -1,8 +1,7 @@
 <template>
   <ul class="tabs">
     <li v-for="item in dataSource" :key="item.value"
-        :class="{selected: item.value === value}"
-        @click="select(item)">{{ item.text }}
+        :class="liClass(item)" @click="select(item)">{{ item.text }}
     </li>
   </ul>
 </template>
@@ -19,8 +18,15 @@ export default class Tabs extends Vue {
   @Prop(String) readonly value!: string;
   @Prop(String) classPrefix?: string;
 
+  liClass(item: DataSourceItem){
+    return {
+      [this.classPrefix + '-tabs-item']: this.classPrefix,
+      selected: item.value === this.value
+    }
+  }
+
   select(item: DataSourceItem) {
-    // this.$emit(event:'update:value', item.value);
+    this.$emit('update:value', item.value);
   }
 }
 </script>
