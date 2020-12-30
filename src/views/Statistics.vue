@@ -24,6 +24,9 @@
     }
   }
 }
+::v-deep li.interval-tabs-item{
+  height: 44px;
+}
 
 
 </style>
