@@ -13,21 +13,22 @@
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
 
-::v-deep .types-tabs-item {
-  background: white;
+::v-deep {
+  .types-tabs-item {
+    background: white;
 
-  &.selected {
-    background: $color-brand;
+    &.selected {
+      background: $color-brand;
 
-    &::after {
-      display: none
+      &::after {
+        display: none
+      }
     }
   }
+  .interval-tabs-item{
+    height: 44px;
+  }
 }
-::v-deep li.interval-tabs-item{
-  height: 44px;
-}
-
 
 </style>
 
