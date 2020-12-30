@@ -15,7 +15,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
-import Types from '@/components/Money/Types.vue';
 import Remarks from '@/components/Money/Remarks.vue';
 import Label from '@/components/Money/Label.vue';
 import {Component} from 'vue-property-decorator';
@@ -27,7 +26,7 @@ import Tabs from '@/components/Tabs.vue';
 // console.log(store === store2);
 
 @Component({
-  components: {Label, Remarks, Types, NumberPad, Tabs},
+  components: {Label, Remarks, NumberPad, Tabs},
 })
 export default class Money extends Vue {
   get recordList() {
