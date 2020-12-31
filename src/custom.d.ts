@@ -6,7 +6,7 @@ type RootState = {
 }
 
 type RecordItem = { // ts 类型声明
-        labels: string[],
+        labels: Label[],
         remarks: string,
         type: string,
         amount: number,
