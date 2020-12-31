@@ -38,6 +38,7 @@
 }
 
 .notes {
+  flex: 1;
   margin-right: 16px;
   margin-left: 16px;
   color: #999;
