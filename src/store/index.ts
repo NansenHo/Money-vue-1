@@ -38,7 +38,7 @@ const store = new Vuex.Store({
                     break;
                 }
             }
-            if(index>=0){
+            if (index >= 0) {
                 state.labelList.splice(index, 1);
                 store.commit('saveLabels');
                 router.back();
@@ -49,13 +49,14 @@ const store = new Vuex.Store({
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
         },
-        createRecord(state, record) {
-            const record2: RecordItem = clone(record);
+        createRecord(state, record: RecordItem) {
+            const record2 = clone(record);
             record2.createdAt = new Date().toISOString();
             state.recordList.push(record2);
             store.commit('saveRecords');
             // console.log(state.recordList);
             // recordStore.saveRecords();
+            window.alert('已保存');
         },
         saveRecords(state) {
             window.localStorage.setItem('recordList',
@@ -63,6 +64,12 @@ const store = new Vuex.Store({
         },
         fetchLabels(state) {
             state.labelList = JSON.parse(window.localStorage.getItem('labelList') || '[]');
+            if (!state.labelList || state.labelList.length === 0) {
+                store.commit('createLabel', '衣');
+                store.commit('createLabel', '食');
+                store.commit('createLabel', '住');
+                store.commit('createLabel', '行');
+            }
         },
         createLabel(state, name: string) {
             // this.data = [{id:'1', name:'1'}, {id:'2',name:'2'}]
@@ -73,7 +80,6 @@ const store = new Vuex.Store({
             const id = createId().toString();
             state.labelList.push({id, name: name});
             store.commit('saveLabels');
-            window.alert('添加成功');
         },
         saveLabels(state) {
             window.localStorage.setItem('labelList',

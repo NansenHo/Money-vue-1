@@ -1,6 +1,6 @@
 <template>
   <div class="number-pad">
-    <div class="number-pad-output">{{ output || '0.00' }}</div>
+    <div class="number-pad-output">{{ output || '0' }}</div>
     <!-- 给一个保底值，不让输入框塌下去 -->
     <div class="number-pad-buttons">
       <button @click="inputContent">1</button>
@@ -28,8 +28,8 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class NumberPad extends Vue {
   @Prop(Number) readonly value!: number;
-  // output: string = '0.00';
-  output = this.value.toString()
+  // output: string = '0';
+  output = this.value.toString();
 
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
@@ -38,10 +38,12 @@ export default class NumberPad extends Vue {
     if (this.output.length === 8) {
       return;
     }
-    if (this.output === '0.00') {
-      if ('0123456789'.indexOf(input) >= 0) {
+    if (this.output === '0') {
+      if ('123456789'.indexOf(input) >= 0) {
         this.output = input;
-      } else {
+      } else if ('0'.indexOf(input) >= 0) {
+        this.output = '0';
+      } else if ('.'.indexOf(input) >= 0) {
         this.output = '0.';
       }
       return;
@@ -61,10 +63,10 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    const number = parseFloat(this.output)
+    const number = parseFloat(this.output);
     this.$emit('update:value', number);
     this.$emit('submit', number);
-    this.output = '0.00';
+    this.output = '0';
   }
 }
 </script>
