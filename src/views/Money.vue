@@ -50,6 +50,9 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
+    if(!this.record.labels || this.record.labels.length === 0){
+      return window.alert('请至少选择一个标签')
+    }
     this.$store.commit('createRecord', this.record);
   }
 }
