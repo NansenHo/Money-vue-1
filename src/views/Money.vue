@@ -3,6 +3,7 @@
     <NumberPad :value="record.amount" @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Remarks field-name="备注："
              placeholder="点击写备注..."
+             :value="record.remarks"
              @update:value="onUpdateRemarks"
     />
     <Label @update:value="record.labels = $event"/>
@@ -54,6 +55,7 @@ export default class Money extends Vue {
       return window.alert('请至少选择一个标签')
     }
     this.$store.commit('createRecord', this.record);
+    this.record.remarks = '';
   }
 }
 </script>
