@@ -34,7 +34,7 @@ import clone from '@/lib/clone';
 })
 export default class Statistics extends Vue {
   labelString(labels: Label[]) {
-    return labels.length === 0 ? '无' : labels.join(',');
+    return labels.length === 0 ? '无' : labels.map(l=>l.name).join('，');
   }
 
   beautify(string: string) {
@@ -62,17 +62,13 @@ export default class Statistics extends Vue {
 
   get groupList() {
     const {recordList} = this;
-    if (recordList.length === 0) {
-      return [];
-    }
-    type HashTableValue = { title: string, items: RecordItem[] }
-
-    // const hashTable: { title: string, items: RecordItem[] }[]
-    // console.log(recordList.map(i => i.createdAt));
     const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-    // console.log(newList.map(i => i.createdAt));
+    if (newList.length === 0) {
+      return [];
+    }
+    type HashTableValue = { title: string, items: RecordItem[] }
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [{
       title: dayjs(recordList[0].createdAt).format('YYYY-M-D'),

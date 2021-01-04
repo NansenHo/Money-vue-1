@@ -5,10 +5,10 @@
              placeholder="点击写备注..."
              @update:value="onUpdateRemarks"
     />
-    <Label/>
+    <Label @update:value="record.labels = $event"/>
     <Tabs class-prefix="types"
           :data-source="recordTypeList"
-          :value.sync="record.type" />
+          :value.sync="record.type"/>
   </layout>
 </template>
 
