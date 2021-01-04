@@ -76,7 +76,7 @@ export default class Statistics extends Vue {
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [{
       title: dayjs(recordList[0].createdAt).format('YYYY-M-D'),
-      items: [newList[0]]
+      items: newList[0] ? [newList[0]]: []
     }];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];

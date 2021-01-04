@@ -1,6 +1,6 @@
 <template>
   <layout class-prefix="layout">
-    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+    <NumberPad :value="record.amount" @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Remarks field-name="备注："
              placeholder="点击写备注..."
              @update:value="onUpdateRemarks"
