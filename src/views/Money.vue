@@ -1,6 +1,6 @@
 <template>
   <layout class-prefix="layout">
-    <NumberPad :value="record.amount" @update:value="onUpdateAmount" @submit="saveRecord"/>
+    <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Remarks field-name="备注："
              placeholder="点击写备注..."
              @update:value="onUpdateRemarks"
@@ -35,7 +35,7 @@ export default class Money extends Vue {
 
   recordTypeList = recordTypeList;
 
-  record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0};
+  record: RecordItem = {labels: [], remarks: '', type: '-', amount: 0.00};
 
   created() {
     this.$store.commit('fetchRecords');

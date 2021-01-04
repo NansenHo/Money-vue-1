@@ -4,7 +4,7 @@
 
     <ol>
       <li v-for="(group, index) in groupList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }}<span>{{group.total}}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }}<span>￥{{group.total}}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record"
@@ -89,7 +89,6 @@ export default class Statistics extends Vue {
     }
     // console.log(result);
     result.map(group => {
-
       group.total = group.items.reduce((sum, item) => {
         console.log(sum);
         console.log(item);
