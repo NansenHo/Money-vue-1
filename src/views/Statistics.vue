@@ -4,7 +4,7 @@
 
     <ol>
       <li v-for="(group, index) in groupList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }}<span>￥{{group.total}}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }}<span>￥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record"
@@ -23,10 +23,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
-import Label from '@/components/Money/Label.vue';
 import clone from '@/lib/clone';
 
 @Component({
@@ -34,7 +32,7 @@ import clone from '@/lib/clone';
 })
 export default class Statistics extends Vue {
   labelString(labels: Label[]) {
-    return labels.length === 0 ? '无' : labels.map(l=>l.name).join('，');
+    return labels.length === 0 ? '无' : labels.map(l => l.name).join('，');
   }
 
   beautify(string: string) {
@@ -72,7 +70,7 @@ export default class Statistics extends Vue {
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [{
       title: dayjs(recordList[0].createdAt).format('YYYY-M-D'),
-      items: newList[0] ? [newList[0]]: []
+      items: newList[0] ? [newList[0]] : []
     }];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
@@ -88,7 +86,8 @@ export default class Statistics extends Vue {
       group.total = group.items.reduce((sum, item) => {
         console.log(sum);
         console.log(item);
-        return sum + item.amount}, 0);
+        return sum + item.amount;
+      }, 0);
     });
     return result;
   }
@@ -99,7 +98,6 @@ export default class Statistics extends Vue {
 
   type = '-';
   interval = 'day';
-  intervalList = intervalList;
   recordTypeList = recordTypeList;
 };
 </script>
