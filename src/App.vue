@@ -19,4 +19,8 @@
         font-family: $font-hei;
         background-color: rgb(245,245,245);
     }
+    #app{
+      max-width: 450px;
+      margin: 0 auto;
+    }
 </style>
