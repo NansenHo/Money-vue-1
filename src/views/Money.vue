@@ -6,7 +6,7 @@
              :value="record.remarks"
              @update:value="onUpdateRemarks"
     />
-    <Label @update:value="record.labels = $event"/>
+    <Label @update:value="record.labels = $event" />
     <Tabs class-prefix="types"
           :data-source="recordTypeList"
           :value.sync="record.type"/>
@@ -56,6 +56,7 @@ export default class Money extends Vue {
     }
     this.$store.commit('createRecord', this.record);
     this.record.remarks = '';
+
   }
 }
 </script>
