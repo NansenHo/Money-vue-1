@@ -1,9 +1,10 @@
 <template>
     <div class="layout-wrapper">
-        <div class="content" :class=" classPrefix && `${classPrefix}-content`"> <!-- 字符串要加上单引号，这里的双引号并不属于js ，只有单引号属于 -->
-            <slot/>
-        </div>
-        <Nav/>
+        <div class="content" :class=" classPrefix && `${classPrefix}-content`"> 
+            <!-- 字符串要加上单引号，这里的双引号并不属于js ，只有单引号属于 -->
+            <slot></slot>
+                </div>
+        <Nav></Nav>
     </div>
 </template>
 

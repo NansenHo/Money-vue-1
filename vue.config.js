@@ -3,7 +3,7 @@ const path = require('path') // 引入一个叫做 path 的 node.js 的模块
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-            ? '/money-website/'
+            ? '/'
             : '/',
     lintOnSave: false,
     chainWebpack: config => { // 添加一个 chainWebpack 函数，它接受 config

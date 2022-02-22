@@ -2,7 +2,7 @@
   <button class="button"
           @click="$emit('click', $event)">
     <!--  button 被点击了 就触发 Button 的点击事件  -->
-    <slot/>
+    <slot></slot>
   </button>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <nav> <!-- <div class="nav"> 错！ <nav> 对！ -->
+    <nav>
         <router-link to="/labels" class="item" active-class="selected">
             <Icon name="labels"/>
             标签
